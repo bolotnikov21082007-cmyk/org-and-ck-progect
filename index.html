@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Становление и развитие университетов в России</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+        :root {
+            --cream-light: #FAF6F0;
+            --cream: #F5F0E8;
+            --cream-dark: #EDE5D8;
+            --beige: #D4C5A9;
+            --beige-dark: #B8A88A;
+            --brown-light: #A0845C;
+            --brown: #8B7355;
+            --brown-dark: #6B5D4F;
+            --text-primary: #4A3F35;
+            --text-secondary: #6B5D4F;
+            --text-light: #8A7D6F;
+            --white: #FFFDF9;
+            --gold: #C4A265;
+            --gold-light: #D4B87A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Source Sans Pro', Georgia, serif; background-color: var(--cream-light); color: var(--text-primary); line-height: 1.8; }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250, 246, 240, 0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--beige); transition: all 0.3s ease; }
+        header.scrolled { box-shadow: 0 2px 30px rgba(74, 63, 53, 0.08); }
+        .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+        .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold), var(--brown)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; font-family: 'Playfair Display', serif; font-weight: 900; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+        .logo-text span { color: var(--brown-light); }
+        nav { display: flex; align-items: center; gap: 8px; }
+        nav a { text-decoration: none; color: var(--text-secondary); font-size: 15px; font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; letter-spacing: 0.3px; }
+        nav a:hover { color: var(--brown); background: var(--cream-dark); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+        .menu-toggle span { width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s ease; }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(160deg, var(--cream-light) 0%, var(--cream) 30%, var(--cream-dark) 60%, var(--beige) 100%); }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(196, 162, 101, 0.08) 0%, transparent 70%); border-radius: 50%; }
+        .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 115, 85, 0.06) 0%, transparent 70%); border-radius: 50%; }
+        .hero-decoration { position: absolute; top: 120px; right: 80px; width: 200px; height: 200px; border: 2px solid var(--beige); border-radius: 50%; opacity: 0.4; }
+        .hero-decoration-2 { position: absolute; bottom: 150px; left: 60px; width: 120px; height: 120px; border: 1px solid var(--beige); transform: rotate(45deg); opacity: 0.3; }
+        .hero-content { text-align: center; padding: 120px 40px 80px; max-width: 950px; position: relative; z-index: 2; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(196, 162, 101, 0.12); border: 1px solid rgba(196, 162, 101, 0.25); padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--brown); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 32px; }
+        .hero-badge::before { content: '◆'; font-size: 8px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5.5vw, 68px); font-weight: 900; line-height: 1.15; color: var(--text-primary); margin-bottom: 24px; }
+        .hero h1 em { font-style: italic; color: var(--brown-light); }
+        .hero-subtitle { font-size: clamp(17px, 2vw, 20px); color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; font-weight: 300; line-height: 1.8; }
+        .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+        .hero-stat { text-align: center; }
+        .hero-stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--brown); }
+        .hero-stat-label { font-size: 13px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 4px; }
+        .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-light); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; animation: float 2s ease-in-out infinite; }
+        .scroll-indicator .arrow { width: 24px; height: 24px; border-right: 2px solid var(--beige-dark); border-bottom: 2px solid var(--beige-dark); transform: rotate(45deg); }
+        @keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+        .section { padding: 90px 40px; }
+        .section-inner { max-width: 1150px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 16px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 700; color: var(--text-primary); line-height: 1.25; margin-bottom: 18px; }
+        .section-desc { font-size: 16px; color: var(--text-secondary); max-width: 720px; margin: 0 auto; font-weight: 300; line-height: 1.8; }
+        .section-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--beige)); border-radius: 2px; margin: 18px auto 0; }
+
+        .intro { background: var(--white); }
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .intro-text h3 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; margin-bottom: 18px; color: var(--text-primary); }
+        .intro-text p { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; text-align: justify; }
+        .intro-image { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4/3; background: var(--cream-dark); }
+        .intro-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .intro-image-placeholder { text-align: center; color: var(--brown); padding: 60px 20px; }
+        .intro-image-placeholder .icon { font-size: 60px; margin-bottom: 12px; }
+        .intro-image-placeholder p { font-size: 14px; font-weight: 600; letter-spacing: 1px; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+        .video-card { background: var(--cream-dark); border-radius: 16px; overflow: hidden; border: 1px solid var(--beige); box-shadow: 0 12px 40px rgba(74, 63, 53, 0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .video-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(74, 63, 53, 0.1); }
+        .local-video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; background: #000; border-radius: 16px 16px 0 0; }
+        .video-info { padding: 20px 24px; }
+        .video-info h4 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; line-height: 1.3; }
+        .video-info p { font-size: 14px; color: var(--text-light); font-weight: 400; line-height: 1.6; }
+
+        /* TIMELINE - IMAGES OPPOSITE WITH EQUAL GAP */
+        .timeline-section { 
+            background: var(--white); 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background images for timeline */
+        .timeline-bg-image {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+            border: none;
+            border-radius: 0;
+        }
+        .timeline-bg-1 { top: 5%; left: 5%; width: 160px; height: 220px; object-fit: cover; transform: rotate(-3deg); }
+        .timeline-bg-2 { top: 15%; right: 4%; width: 180px; height: 240px; object-fit: cover; transform: rotate(2deg); }
+        .timeline-bg-3 { top: 35%; left: 5%; width: 140px; height: 200px; object-fit: cover; transform: rotate(-2deg); }
+        .timeline-bg-4 { bottom: 30%; right: 5%; width: 170px; height: 230px; object-fit: cover; transform: rotate(3deg); }
+        .timeline-bg-5 { bottom: 15%; left: 4%; width: 150px; height: 210px; object-fit: cover; transform: rotate(-1deg); }
+        .timeline-bg-6 { top: 50%; right: 3%; width: 160px; height: 220px; object-fit: cover; transform: rotate(2deg); }
+        .timeline-bg-7 { bottom: 7%; right: 6%; width: 190px; height: 250px; object-fit: cover; transform: rotate(-2deg); }
+        
+        .timeline { position: relative; max-width: 1100px; margin: 0 auto; z-index: 1; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--beige), var(--gold-light), var(--beige)); transform: translateX(-50%); }
+        .timeline-item { display: flex; align-items: center; margin-bottom: 60px; position: relative; gap: 140px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-content { width: calc(50% - 70px); background: var(--cream-light); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 26px; opacity: 0; transition: opacity 1s ease, transform 1.8s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .timeline-item:nth-child(odd) .timeline-content { transform: translateX(-60px); }
+        .timeline-item:nth-child(even) .timeline-content { transform: translateX(60px); }
+        .timeline-item.is-visible .timeline-content { opacity: 1; transform: translateX(0); }
+        .timeline-content:hover { box-shadow: 0 12px 40px rgba(74, 63, 53, 0.08); border-color: var(--beige); }
+        .timeline-image { width: calc(50% - 70px); border-radius: 16px; overflow: hidden; background: var(--cream-dark); aspect-ratio: 4/3; opacity: 0; transform: scale(0.95); transition: opacity 1.8s ease, transform 1.8s ease; }
+        .timeline-item:nth-child(odd) .timeline-image { transform: translateX(60px) scale(0.95); }
+        .timeline-item:nth-child(even) .timeline-image { transform: translateX(-60px) scale(0.95); }
+        .timeline-item.is-visible .timeline-image { opacity: 1; transform: translateX(0) scale(1); }
+        .timeline-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .timeline-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--cream-dark); color: var(--brown-light); font-size: 13px; font-weight: 600; padding: 20px; text-align: center; }
+        .timeline-dot { position: absolute; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: var(--gold); border: 3px solid var(--white); border-radius: 50%; box-shadow: 0 0 0 4px rgba(196, 162, 101, 0.2); z-index: 2; transition: transform 0.3s ease, background 0.3s ease; }
+        .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); background: var(--brown); }
+        .timeline-year { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
+        .timeline-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .timeline-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; text-align: justify; }
+
+        .structure-section { background: var(--cream); }
+        .structure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .structure-block { background: var(--white); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 32px; }
+        .structure-block h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+        .structure-block p { font-size: 15px; color: var(--text-secondary); margin-bottom: 14px; text-align: justify; }
+        .structure-list { list-style: none; margin-top: 12px; }
+        .structure-list li { padding: 10px 0; border-bottom: 1px dashed var(--beige); font-size: 15px; color: var(--text-secondary); display: flex; align-items: baseline; gap: 10px; }
+        .structure-list li:last-child { border-bottom: none; }
+        .structure-list li::before { content: '•'; color: var(--brown); font-weight: bold; font-size: 18px; }
+
+        .tyumgu-section { background: var(--white); }
+        .tyumgu-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; margin-top: 40px; }
+        .tyumgu-text p { font-size: 15px; color: var(--text-secondary); margin-bottom: 16px; text-align: justify; }
+        .tyumgu-text h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
+        .tyumgu-card { background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 32px; }
+        .tyumgu-card h4 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 14px; color: var(--text-primary); }
+        .tyumgu-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; text-align: justify; margin-bottom: 12px; }
+        .person-tag { display: inline-block; margin: 4px 4px 0 0; padding: 4px 10px; background: rgba(196, 162, 101, 0.1); border: 1px solid rgba(196, 162, 101, 0.2); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--brown); }
+
+        .modern-section { background: var(--cream-light); }
+        .modern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+        .modern-card { background: var(--white); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 28px; transition: all 0.3s ease; }
+        .modern-card:hover { box-shadow: 0 10px 30px rgba(74, 63, 53, 0.06); border-color: var(--beige); }
+        .modern-card-icon { width: 48px; height: 48px; background: linear-gradient(135deg, rgba(196, 162, 101, 0.12), rgba(196, 162, 101, 0.06)); border: 1px solid rgba(196, 162, 101, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+        .modern-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .modern-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; text-align: justify; }
+
+        .quote-section { background: linear-gradient(135deg, var(--brown-dark), var(--brown), var(--brown-light)); color: white; text-align: center; padding: 70px 40px; }
+        .quote-section .section-label { color: var(--gold-light); }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 400; font-style: italic; max-width: 800px; margin: 0 auto 20px; line-height: 1.6; color: rgba(255, 253, 249, 0.95); }
+        .quote-author { font-size: 14px; font-weight: 600; color: var(--gold-light); letter-spacing: 1px; }
+
+        .references { background: var(--cream); }
+        .ref-list { max-width: 800px; margin: 0 auto; list-style: none; counter-reset: ref; }
+        .ref-list li { counter-increment: ref; padding: 16px 0; border-bottom: 1px solid var(--beige); font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+        .ref-list li:last-child { border-bottom: none; }
+        .ref-list li::before { content: '[' counter(ref) '] '; font-weight: 700; color: var(--brown); margin-right: 8px; }
+        .ref-link { color: var(--brown-light); text-decoration: none; border-bottom: 1px dashed var(--brown-light); transition: color 0.2s; font-weight: 600; }
+        .ref-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+        footer { background: var(--text-primary); color: rgba(255, 253, 249, 0.7); padding: 50px 40px 35px; }
+        .footer-inner { max-width: 1150px; margin: 0 auto; }
+        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; padding-bottom: 35px; border-bottom: 1px solid rgba(255, 253, 249, 0.1); }
+        .footer-brand { max-width: 320px; }
+        .footer-brand .logo { color: white; margin-bottom: 14px; }
+        .footer-brand .logo-icon { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+        .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255, 253, 249, 0.5); }
+        .footer-links h4 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: rgba(255, 253, 249, 0.9); margin-bottom: 14px; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 6px; }
+        .footer-links a { color: rgba(255, 253, 249, 0.5); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold-light); }
+        .footer-bottom { padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: 13px; color: rgba(255, 253, 249, 0.35); }
+
+        @media (max-width: 950px) {
+            .header-inner { padding: 0 20px; }
+            nav { display: none; position: absolute; top: 72px; left: 0; right: 0; background: var(--cream-light); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--beige); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+            nav.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .section { padding: 60px 20px; }
+            .intro-grid, .structure-grid, .tyumgu-grid, .video-grid, .modern-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 18px; }
+            .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; padding-left: 45px; gap: 20px; }
+            .timeline-content, .timeline-image { width: 100%; }
+            .timeline-dot { left: 18px; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content { transform: translateY(40px); }
+            .timeline-item:nth-child(odd) .timeline-image,
+            .timeline-item:nth-child(even) .timeline-image { transform: translateY(40px) scale(0.95); }
+            .timeline-item.is-visible .timeline-content,
+            .timeline-item.is-visible .timeline-image { transform: translateY(0) scale(1); }
+            .footer-top { flex-direction: column; }
+            .timeline-bg-image { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">У</div>
+                <div class="logo-text">Университеты <span>России</span></div>
+            </a>
+            <nav id="nav">
+                <a href="#history">История</a>
+                <a href="#structure">Структура</a>
+                <a href="#tyumgu">ТюмГУ</a>
+                <a href="#modern">Современность</a>
+                <a href="#videos">Видео</a>
+                <a href="#references">Источники</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-decoration"></div>
+        <div class="hero-decoration-2"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Научно-исторический обзор</div>
+            <h1>Становление и развитие <em>университетов</em> в России</h1>
+            <p class="hero-subtitle">
+                От императорских указов XVIII века до современных исследовательских центров: эволюция высшего образования, структурные трансформации и региональные научные школы
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="hero-stat-number">270+</div><div class="hero-stat-label">Лет истории</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">730+</div><div class="hero-stat-label">Вузов в РФ</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">4.2 млн</div><div class="hero-stat-label">Студентов</div></div>
+            </div>
+        </div>
+        <div class="scroll-indicator"><span>Листайте вниз</span><div class="arrow"></div></div>
+    </section>
+
+    <section class="section intro" id="history">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Введение</div>
+                <h2 class="section-title">Зарождение университетской традиции</h2>
+            </div>
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h3>От идеи Просвещения к государственной системе</h3>
+                    <p>История университетов в России неразрывно связана с процессами модернизации государства и интеграцией в европейское научное пространство. Учреждение Московского университета в 1755 году, чему послужил указ императрицы Екатерина II, стало ответом на запрос империи в собственных кадрах: до этого российская элита вынуждена была получать образование за границей, преимущественно в Германии и Франции. </p>
+                    <p>Инициатива М.В. Ломоносова и И.И. Шувалова закрепила принцип доступности высшего образования для разночинцев, что стало революционным для сословного общества. Уже к концу XVIII века университет превратился не только в образовательный, но и в культурно-просветительский центр, вокруг которого формировались научные общества, библиотеки и типографии.</p>
+                    <p>В XIX веке система прошла через несколько уставных реформ (1804, 1835, 1863, 1884), каждая из которых отражала колебания государственной политики между автономией академического сообщества и усилением административного контроля. Несмотря на политические ограничения, российские университеты выпустили поколение учёных, чьи открытия вошли в золотой фонд мировой науки.</p>
+                </div>
+                <div class="intro-image">
+                    <img src="images/01_image.jpg" alt="Указ Елизаветы Петровой, 1755 г." onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="intro-image-placeholder" style="display: none; align-items: center; justify-content: center; height: 100%; flex-direction: column;">
+                        <div class="icon">📜</div>
+                        <p>Указ Елизаветы Петровой, 1755 г.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section timeline-section">
+        <!-- Background Images -->
+        <img src="fon_images/01_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-1" onerror="this.style.display='none'">
+        <img src="fon_images/02_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-2" onerror="this.style.display='none'">
+        <img src="fon_images/03_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-3" onerror="this.style.display='none'">
+        <img src="fon_images/04_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-4" onerror="this.style.display='none'">
+        <img src="fon_images/05_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-5" onerror="this.style.display='none'">
+        <img src="fon_images/06_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-6" onerror="this.style.display='none'">
+        <img src="fon_images/07_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-7" onerror="this.style.display='none'">
+        
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Хронология</div>
+                <h2 class="section-title">Ключевые этапы развития</h2>
+                <p class="section-desc">Как менялась архитектура высшего образования под влиянием эпох, государственных реформ и научных запросов</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1724–1755</div>
+                        <div class="timeline-title">Предтечи и рождение первого университета</div>
+                        <div class="timeline-desc">Академический университет при Петербургской Академии наук (1724) заложил научные традиции, но оставался элитарным. Указ 1755 года создал Московский университет с демократичным доступом, тремя факультетами и собственной типографией, став точкой отсчёта массовой университетской традиции.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/02_image.jpg" alt="1724-1755" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/02_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1802–1804</div>
+                        <div class="timeline-title">Формирование опорной сети</div>
+                        <div class="timeline-desc">Открытие Дерптского, Казанского, Харьковского и Санкт-Петербургского университетов. Введение учебных округов, выборности ректоров и советов. Университеты стали центрами формирования региональной интеллигенции.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/03_image.jpg" alt="1802-1804" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/03_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1835</div>
+                        <div class="timeline-title">Консервативный поворот и унификация</div>
+                        <div class="timeline-desc">Новый устав ограничил автономию, усилил контроль попечителей и Министерства просвещения. Однако именно в этот период заложились основы фундаментального естественнонаучного и филологического образования, выведшего русскую науку на мировой уровень.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/04_image.jpg" alt="1835" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/04_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1863</div>
+                        <div class="timeline-title">Золотой век академической свободы</div>
+                        <div class="timeline-desc">Либеральный устав вернул выборность профессоров, расширил права учёных советов, разрешил создание студенческих корпораций. Период расцвета научных школ: Менделеев, Сеченов, Тимирязев, Филонов.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/05_image.jpg" alt="1863" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/05_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1884–1917</div>
+                        <div class="timeline-title">Реакция и дореволюционный ренессанс</div>
+                        <div class="timeline-desc">Реакционный устав 1884 года вновь ограничил самоуправление, но экономический рост стимулировал открытие вузов в Томске (1878), Саратове (1909), Перми (1916). Расширение женского образования: открытие Высших женских курсов.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/06_image.jpg" alt="1884-1917" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/06_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1920–1950-е</div>
+                        <div class="timeline-title">Советская трансформация и индустриализация</div>
+                        <div class="timeline-desc">Ликвидация старых факультетов, создание отраслевых институтов, рабфаки. Переход от элитарного к массовому образованию. После 1943 года восстановление классических университетов и создание новой системы послевоенного восстановления науки.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/07_image.jpg" alt="1920-1950" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/07_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1990–2010-е</div>
+                        <div class="timeline-title">Постсоветская модернизация</div>
+                        <div class="timeline-desc">Переход на многоуровневую систему, внедрение ЕГЭ, Болонский процесс (2003). Создание федеральных и национальных исследовательских университетов. Формирование конкурентной среды и грантового финансирования.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/08_image.jpg" alt="1990-2010" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/08_image.jpg</div>'">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020–е</div>
+                        <div class="timeline-title">«Приоритет 2030» и технологический суверенитет</div>
+                        <div class="timeline-desc">Запуск масштабной программы развития вузов, ориентированной на прикладные НИОКР, цифровизацию, региональное лидерство и подготовку кадров для высокотехнологичных отраслей в условиях новых экономических реалий.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-image">
+                        <img src="images/09_image.jpg" alt="2020" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\'>images/09_image.jpg</div>'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section structure-section" id="structure">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Организация</div>
+                <h2 class="section-title">Структура российских университетов</h2>
+                <p class="section-desc">Как устроена современная система высшего образования в РФ</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="structure-grid">
+                <div class="structure-block">
+                    <h3>Уровни образования и степени</h3>
+                    <p>Современная российская система опирается на многоуровневую модель, закреплённую Федеральным законом «Об образовании в Российской Федерации». Каждый уровень предполагает чёткие компетенции и сроки обучения.</p>
+                    <ul class="structure-list">
+                        <li><strong>Бакалавриат:</strong> 4 года, базовая профессиональная подготовка, ориентация на практику или продолжение обучения.</li>
+                        <li><strong>Специалитет:</strong> 5–6 лет, сохраняется в медицине, инженерии и творческих направлениях.</li>
+                        <li><strong>Магистратура:</strong> 2 года, углублённая научно-исследовательская или управленческая специализация.</li>
+                        <li><strong>Аспирантура/Ординатура:</strong> подготовка научно-педагогических кадров высшей квалификации.</li>
+                    </ul>
+                </div>
+                <div class="structure-block">
+                    <h3>Организационно-управленческая модель</h3>
+                    <p>Университет функционирует как автономное юридическое лицо с внутренним разделением на структурные подразделения, каждое из которых отвечает за определённый образовательный или научный контур.</p>
+                    <ul class="structure-list">
+                        <li><strong>Ректорат и Учёный совет:</strong> стратегическое управление, утверждение программ и стандартов.</li>
+                        <li><strong>Институты и факультеты:</strong> базовые структурные единицы, объединяющие профили подготовки.</li>
+                        <li><strong>Кафедры:</strong> ядро учебно-научной работы, формирование дисциплин и методик.</li>
+                        <li><strong>Научно-исследовательские центры:</strong> лаборатории, инжиниринговые центры, технопарки.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tyumgu-section" id="tyumgu">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Региональный фокус</div>
+                <h2 class="section-title">Тюменский государственный университет</h2>
+                <p class="section-desc">От педагогического института к ведущему научно-образовательному центру Западной Сибири</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="tyumgu-grid">
+                <div class="tyumgu-text">
+                    <h3>История и миссия</h3>
+                    <p>Тюменский государственный университет (ТюмГУ) ведёт свою историю от Тюменского педагогического института, основанного в 1930 году. Статус университета был получен в 1993 году, что позволило расширить спектр направлений подготовки и усилить научную составляющую деятельности.</p>
+                    <p>Университет традиционно играет ключевую роль в кадровом обеспечении нефтегазовой отрасли Западной Сибири, а также в развитии педагогики, биологии, гуманитарных наук и цифровых технологий. В 2010-е годы ТюмГУ вошёл в число опорных вузов, а впоследствии стал участником программы «Приоритет 2030».</p>
+                    <p>Научная школа ТюмГУ известна исследованиями в области криологии, экологии Севера, археологии Западной Сибири и цифровой экономики. Университет активно развивает кластерный подход, объединяя академические подразделения с промышленными партнёрами региона.</p>
+                </div>
+                <div class="tyumgu-card">
+                    <h4>Известные личности и выпускники</h4>
+                    <p>За более чем 90 лет существования вуз подготовил десятки тысяч специалистов, среди которых выдающиеся учёные, государственные деятели, деятели культуры и спорта.</p>
+                    <div style="margin-bottom: 12px;">
+                        <span class="person-tag">В.Н. Хлёстов</span>
+                        <span class="person-tag">Академик, первый ректор</span>
+                    </div>
+                    <p>Основоположник системного подхода к развитию высшего образования в Тюменской области. Под его руководством пединститут трансформировался в многопрофильный университет.</p>
+                    <div style="margin-bottom: 12px; margin-top: 16px;">
+                        <span class="person-tag">Учёные-геологи</span>
+                        <span class="person-tag">Нефтегазовая отрасль</span>
+                    </div>
+                    <p>Выпускники факультета геологии и географии внесли ключевой вклад в открытие и освоение месторождений Западной Сибири, сформировав научную базу отечественной нефтегазовой промышленности.</p>
+                    <div style="margin-bottom: 12px; margin-top: 16px;">
+                        <span class="person-tag">Педагоги и писатели</span>
+                        <span class="person-tag">Культура региона</span>
+                    </div>
+                    <p>Среди выпускников — заслуженные учителя РФ, авторы учебников, поэты и прозаики, чьи произведения вошли в антологии сибирской литературы. Университет продолжает традиции подготовки кадров для образовательной и культурной сфер.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section modern-section" id="modern">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Перспективы</div>
+                <h2 class="section-title">Современные вызовы и тренды</h2>
+                <p class="section-desc">Куда движется система высшего образования в России</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="modern-grid">
+                <div class="modern-card">
+                    <div class="modern-card-icon">🌐</div>
+                    <h3>Цифровая трансформация</h3>
+                    <p>Внедрение LMS-платформ, цифровых кафедр, виртуальных лабораторий и ИИ-ассистентов. Переход к гибридным форматам обучения и созданию единых образовательных экосистем.</p>
+                </div>
+                <div class="modern-card">
+                    <div class="modern-card-icon">🔬</div>
+                    <h3>Научное лидерство</h3>
+                    <p>Фокус на прикладных исследованиях, технологическом предпринимательстве и коммерциализации разработок. Университеты становятся ядрами инновационных кластеров.</p>
+                </div>
+                <div class="modern-card">
+                    <div class="modern-card-icon">🤝</div>
+                    <h3>Региональная миссия</h3>
+                    <p>Усиление роли вузов как драйверов регионального развития. Программы целевой подготовки, сотрудничество с предприятиями и адаптация учебных планов под локальные рынки труда.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="section-label">Цитата</div>
+        <blockquote class="quote-text">«Университет — это не здание, не бюджет, не дипломы. Это живая среда, в которой рождается мысль, способная изменить будущее»</blockquote>
+        <div class="quote-author">— Из работ по философии образования</div>
+    </section>
+
+    <section class="section" id="videos" style="background: var(--cream-light);">
+    <div class="section-inner">
+        <div class="section-header">
+            <div class="section-label">Видеоматериалы</div>
+            <h2 class="section-title">Образовательные видео</h2>
+            <p class="section-desc">Подборка материалов, раскрывающих ключевые аспекты развития университетской системы России</p>
+            <div class="section-divider"></div>
+        </div>
+        <div class="video-grid">
+            <!-- Видео 1: История университетов России -->
+            <div class="video-card">
+                <a href="https://rutube.ru/video/6da21512a0bd695e92d0aab73028a085/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
+                    <div class="video-wrapper" style="cursor: pointer; position: relative;">
+                        <img src="video_thumb/01_thumb.png" alt="История университетов России" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 64px; height: 64px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                                <span style="color: var(--brown); font-size: 24px; margin-left: 4px;">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="video-info">
+                    <h4>История университетов России</h4>
+                    <p>Хронология от XVIII века до постсоветской трансформации. Анализ уставов, реформ и роли вузов в формировании национальной идентичности.</p>
+                </div>
+            </div>
+            
+            <!-- Видео 2: Структура современных вузов РФ -->
+            <div class="video-card">
+                <a href="https://rutube.ru/video/29bede0eb8aac9b3a5aeb0fcc6c4ce01/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
+                    <div class="video-wrapper" style="cursor: pointer; position: relative;">
+                        <img src="video_thumb/02_thumb.png" alt="Структура современных вузов РФ" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 64px; height: 64px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                                <span style="color: var(--brown); font-size: 24px; margin-left: 4px;">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="video-info">
+                    <h4>Структура современных вузов РФ</h4>
+                    <p>Организационно-управленческая модель: факультеты, институты, кафедры, научные центры. Различия между классическими, федеральными и исследовательскими университетами.</p>
+                </div>
+            </div>
+            
+            <!-- Видео 3: Известные личности ТюмГУ -->
+            <div class="video-card">
+                <a href="https://rutube.ru/video/be54cf032675cec84d0dd451d7f2d18b/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
+                    <div class="video-wrapper" style="cursor: pointer; position: relative;">
+                        <img src="video_thumb/03_thumb.png" alt="Известные личности ТюмГУ" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 64px; height: 64px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                                <span style="color: var(--brown); font-size: 24px; margin-left: 4px;">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="video-info">
+                    <h4>Известные личности ТюмГУ</h4>
+                    <p>Выдающиеся учёные, ректоры и выпускники Тюменского государственного университета. Их вклад в геологию, нефтяную отрасль, педагогику и культуру Западной Сибири.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="section references" id="references">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Научная база</div>
+                <h2 class="section-title">Использованные источники</h2>
+                <p class="section-desc">Материалы подготовлены на основе публикаций из рецензируемых журналов. Ссылки ведут на прямой поиск в CyberLeninka для гарантированного доступа к полным текстам.</p>
+                <div class="section-divider"></div>
+            </div>
+            <ol class="ref-list">
+    <li>Манахов С. В., Рыжакова А. В. — <em>Основные тенденции развития высшего образования в России: количественные и качественные аспекты</em>. <a href="https://cyberleninka.ru/article/n/osnovnye-tendentsii-razvitiya-vysshego-obrazovaniya-v-rossii-kolichestvennye-i-kachestvennye-aspekty" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Павловская А. В. — <em>М. В. Ломоносов и традиции университетского образования</em>. <a href="https://cyberleninka.ru/article/n/m-v-lomonosov-i-traditsii-universitetskogo-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Максимова В. М. — <em>К истории утверждения уставов императорского Московского университета и развитие системы управления университетом</em>. <a href="https://cyberleninka.ru/article/n/k-istorii-utverzhdeniya-ustavov-imperatorskogo-moskovskogo-universiteta-i-razvitie-sistemy-upravleniya-universitetom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Клячко Т. Л. — <em>Новые тенденции в развитии образования</em>. <a href="https://cyberleninka.ru/article/n/novye-tendentsii-v-razvitii-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Бермус А. Г. — <em>Трансформация высшего образования в России с позиций мир-системного анализа: современные тенденции</em>. <a href="https://cyberleninka.ru/article/n/transformatsiya-vysshego-obrazovaniya-v-rossii-s-pozitsiy-mir-sistemnogo-analiza-sovremennye-tendentsii" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Бермус А. Г. — <em>Проблемы и перспективы постболонского реформирования системы высшего образования в России: теоретический обзор</em>. <a href="https://cyberleninka.ru/article/n/problemy-i-perspektivy-postbolonskogo-reformirovaniya-sistemy-vysshego-obrazovaniya-v-rossii-teoreticheskiy-obzor" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Захарьящева В. В. — <em>Ретроспективный анализ развития высшего университетского образования в России и за рубежом</em>. <a href="https://cyberleninka.ru/article/n/retrospektivnyy-analiz-razvitiya-vysshego-universitetskogo-obrazovaniya-v-rossii-i-za-rubezhom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Фандо Р. А. — <em>Развитие негосударственного высшего образования в дореволюционной России (на примере Московского городского народного университета им. А. Л. Шанявского)</em>. <a href="https://cyberleninka.ru/article/n/razvitie-negosudarstvennogo-vysshego-obrazovaniya-v-dorevolyutsionnoy-rossii-na-primere-moskovskogo-gorodskogo-narodnogo" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Клячко Т. Л. — <em>Образование в Российской Федерации: проблемы и тенденции развития в начале XXI века</em>. <a href="https://cyberleninka.ru/article/n/obrazovanie-v-rossiyskoy-federatsii-problemy-i-tendentsii-razvitiya-v-nachale-xxi-veka" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+
+    <li>Новиков С. В. — <em>Современное состояние и тенденции развития российской системы высшего образования</em>. <a href="https://cyberleninka.ru/article/n/sovremennoe-sostoyanie-i-tendentsii-razvitiya-rossiyskoy-sistemy-vysshego-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+</ol>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">У</div>
+                        <div class="logo-text">Университеты <span>России</span></div>
+                    </a>
+                    <p>Информационно-аналитический ресурс, посвящённый эволюции высшего образования в Российской Федерации. Материалы основаны на рецензируемых научных публикациях.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="#history">История</a></li>
+                        <li><a href="#structure">Структура</a></li>
+                        <li><a href="#tyumgu">ТюмГУ</a></li>
+                        <li><a href="#modern">Современность</a></li>
+                        <li><a href="#videos">Видео</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Источники</h4>
+                    <ul>
+                        <li><a href="https://cyberleninka.ru" target="_blank">CyberLeninka</a></li>
+                        <li><a href="https://www.utmn.ru/new-model/" target="_blank">utmn.ru</a></li>
+                        <li><a href="#references">Список литературы</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Университеты России. Научно-просветительский проект.</p>
+                <p>Создано в образовательных целях</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
+        nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            observer.observe(item);
+        });
+
+        const generalObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    generalObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.structure-block, .modern-card, .tyumgu-text, .tyumgu-card, .video-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            generalObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
