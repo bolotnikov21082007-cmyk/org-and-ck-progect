@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4A3F35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Становление и развитие университетов в России</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
@@ -38,8 +41,11 @@
         nav { display: flex; align-items: center; gap: 8px; }
         nav a { text-decoration: none; color: var(--text-secondary); font-size: 15px; font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; letter-spacing: 0.3px; }
         nav a:hover { color: var(--brown); background: var(--cream-dark); }
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; z-index: 1001; }
         .menu-toggle span { width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(160deg, var(--cream-light) 0%, var(--cream) 30%, var(--cream-dark) 60%, var(--beige) 100%); }
         .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(196, 162, 101, 0.08) 0%, transparent 70%); border-radius: 50%; }
@@ -86,22 +92,8 @@
         .video-info h4 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; line-height: 1.3; }
         .video-info p { font-size: 14px; color: var(--text-light); font-weight: 400; line-height: 1.6; }
 
-        /* TIMELINE - IMAGES OPPOSITE WITH EQUAL GAP */
-        .timeline-section { 
-            background: var(--white); 
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Background images for timeline */
-        .timeline-bg-image {
-            position: absolute;
-            opacity: 0.1;
-            z-index: 0;
-            pointer-events: none;
-            border: none;
-            border-radius: 0;
-        }
+        .timeline-section { background: var(--white); position: relative; overflow: hidden; }
+        .timeline-bg-image { position: absolute; opacity: 0.1; z-index: 0; pointer-events: none; border: none; border-radius: 0; }
         .timeline-bg-1 { top: 5%; left: 5%; width: 160px; height: 220px; object-fit: cover; transform: rotate(-3deg); }
         .timeline-bg-2 { top: 15%; right: 4%; width: 180px; height: 240px; object-fit: cover; transform: rotate(2deg); }
         .timeline-bg-3 { top: 35%; left: 5%; width: 140px; height: 200px; object-fit: cover; transform: rotate(-2deg); }
@@ -187,26 +179,125 @@
         .footer-links a:hover { color: var(--gold-light); }
         .footer-bottom { padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer-bottom p { font-size: 13px; color: rgba(255, 253, 249, 0.35); }
+        .footer-links li span { color: rgba(255, 253, 249, 0.5); font-size: 14px; line-height: 1.8; display: block; }
+        .footer-links li span:hover { color: var(--gold-light); cursor: default; }
 
-        @media (max-width: 950px) {
-            .header-inner { padding: 0 20px; }
-            nav { display: none; position: absolute; top: 72px; left: 0; right: 0; background: var(--cream-light); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--beige); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-            nav.active { display: flex; }
-            .menu-toggle { display: flex; }
+        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+        
+        /* Планшеты и маленькие ноутбуки */
+        @media (max-width: 768px) {
+            .header-inner { padding: 0 16px; height: 64px; }
+            .logo-text { font-size: 16px; }
+            .logo-icon { width: 36px; height: 36px; font-size: 18px; }
+            
+            .hero-content { padding: 100px 20px 60px; }
+            .hero h1 { font-size: clamp(32px, 8vw, 48px); }
+            .hero-subtitle { font-size: 16px; }
+            .hero-stats { gap: 32px; }
+            .hero-stat-number { font-size: 28px; }
+            
             .section { padding: 60px 20px; }
-            .intro-grid, .structure-grid, .tyumgu-grid, .video-grid, .modern-grid { grid-template-columns: 1fr; }
-            .timeline::before { left: 18px; }
-            .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; padding-left: 45px; gap: 20px; }
+            .section-title { font-size: clamp(24px, 5vw, 32px); }
+            .section-desc { font-size: 15px; }
+            
+            .intro-grid, .structure-grid, .tyumgu-grid { gap: 32px; }
+            .video-grid, .modern-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            
+            .timeline::before { left: 16px; }
+            .timeline-item, .timeline-item:nth-child(even) { 
+                flex-direction: column; 
+                padding-left: 40px; 
+                gap: 16px; 
+                margin-bottom: 40px;
+            }
             .timeline-content, .timeline-image { width: 100%; }
-            .timeline-dot { left: 18px; }
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content { transform: translateY(40px); }
-            .timeline-item:nth-child(odd) .timeline-image,
-            .timeline-item:nth-child(even) .timeline-image { transform: translateY(40px) scale(0.95); }
-            .timeline-item.is-visible .timeline-content,
-            .timeline-item.is-visible .timeline-image { transform: translateY(0) scale(1); }
-            .footer-top { flex-direction: column; }
-            .timeline-bg-image { display: none; }
+            .timeline-dot { left: 16px; width: 14px; height: 14px; }
+            .timeline-year { font-size: 20px; }
+            
+            .footer-top { gap: 32px; }
+            .footer-brand { max-width: 100%; }
+            .footer-links h4 { font-size: 15px; margin-bottom: 12px; }
+            .footer-links li { margin-bottom: 4px; }
+            .footer-links a, .footer-links li span { font-size: 13px; }
+            
+            .quote-text { font-size: clamp(18px, 4vw, 24px); }
+        }
+
+        /* Смартфоны (портрет) */
+        @media (max-width: 480px) {
+            html { font-size: 14px; }
+            
+            .header-inner { padding: 0 12px; height: 56px; }
+            .logo-text { font-size: 14px; }
+            .logo-icon { width: 32px; height: 32px; font-size: 16px; }
+            
+            nav { top: 56px; padding: 16px; }
+            nav a { padding: 10px 12px; font-size: 14px; }
+            .menu-toggle span { width: 22px; }
+            
+            .hero-content { padding: 80px 16px 40px; }
+            .hero h1 { font-size: clamp(28px, 9vw, 40px); line-height: 1.2; }
+            .hero-subtitle { font-size: 14px; line-height: 1.7; }
+            .hero-badge { padding: 6px 16px; font-size: 11px; }
+            .hero-stats { gap: 24px; flex-direction: column; align-items: center; }
+            .hero-stat-number { font-size: 24px; }
+            .hero-stat-label { font-size: 11px; }
+            
+            .section { padding: 48px 16px; }
+            .section-header { margin-bottom: 40px; }
+            .section-title { font-size: clamp(22px, 6vw, 28px); }
+            .section-desc { font-size: 14px; }
+            .section-divider { width: 48px; }
+            
+            .intro-grid, .structure-grid, .tyumgu-grid, 
+            .video-grid, .modern-grid { grid-template-columns: 1fr; gap: 24px; }
+            
+            .intro-text h3, .structure-block h3, .tyumgu-text h3 { font-size: 20px; }
+            .intro-text p, .structure-block p, .tyumgu-card p { font-size: 14px; }
+            
+            .timeline::before { left: 14px; }
+            .timeline-item, .timeline-item:nth-child(even) { 
+                padding-left: 36px; 
+                margin-bottom: 32px; 
+            }
+            .timeline-content { padding: 20px; border-radius: 12px; }
+            .timeline-image { border-radius: 12px; }
+            .timeline-dot { left: 14px; width: 12px; height: 12px; }
+            .timeline-year { font-size: 18px; }
+            .timeline-title { font-size: 15px; }
+            .timeline-desc { font-size: 13px; line-height: 1.6; }
+            
+            .tyumgu-grid { gap: 28px; }
+            .tyumgu-card { padding: 24px; }
+            
+            .modern-card { padding: 24px; }
+            .modern-card-icon { width: 40px; height: 40px; font-size: 18px; }
+            
+            .quote-section { padding: 48px 16px; }
+            .quote-text { font-size: clamp(16px, 5vw, 20px); }
+            .quote-author { font-size: 13px; }
+            
+            .ref-list li { font-size: 14px; padding: 12px 0; }
+            
+            footer { padding: 40px 16px 24px; }
+            .footer-top { flex-direction: column; gap: 28px; padding-bottom: 28px; }
+            .footer-brand p { font-size: 13px; }
+            .footer-links h4 { font-size: 14px; }
+            .footer-links a, .footer-links li span { font-size: 13px; line-height: 1.7; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 12px; padding-top: 16px; }
+            .footer-bottom p { font-size: 12px; }
+            
+            a, button, .menu-toggle { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+            nav a { min-height: auto; padding: 12px 16px; }
+            
+            .timeline-bg-image { display: none !important; }
+        }
+
+        /* Улучшения для тач-устройств */
+        @media (hover: none) and (pointer: coarse) {
+            nav a:hover { background: none; }
+            .video-card:hover, .modern-card:hover, .structure-block:hover { transform: none; box-shadow: 0 12px 40px rgba(74, 63, 53, 0.06); }
+            .timeline-content:hover { box-shadow: 0 12px 40px rgba(74, 63, 53, 0.08); }
         }
     </style>
 </head>
@@ -243,8 +334,8 @@
             </p>
             <div class="hero-stats">
                 <div class="hero-stat"><div class="hero-stat-number">270+</div><div class="hero-stat-label">Лет истории</div></div>
-                <div class="hero-stat"><div class="hero-stat-number">730+</div><div class="hero-stat-label">Вузов в РФ</div></div>
-                <div class="hero-stat"><div class="hero-stat-number">4.2 млн</div><div class="hero-stat-label">Студентов</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">750+</div><div class="hero-stat-label">Вузов в РФ</div></div>
+                <div class="hero-stat"><div class="hero-stat-number">4.8 млн</div><div class="hero-stat-label">Студентов</div></div>
             </div>
         </div>
         <div class="scroll-indicator"><span>Листайте вниз</span><div class="arrow"></div></div>
@@ -275,7 +366,6 @@
     </section>
 
     <section class="section timeline-section">
-        <!-- Background Images -->
         <img src="fon_images/01_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-1" onerror="this.style.display='none'">
         <img src="fon_images/02_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-2" onerror="this.style.display='none'">
         <img src="fon_images/03_fon_image.jpg" alt="" class="timeline-bg-image timeline-bg-3" onerror="this.style.display='none'">
@@ -436,8 +526,8 @@
                     <h4>Известные личности и выпускники</h4>
                     <p>За более чем 90 лет существования вуз подготовил десятки тысяч специалистов, среди которых выдающиеся учёные, государственные деятели, деятели культуры и спорта.</p>
                     <div style="margin-bottom: 12px;">
-                        <span class="person-tag">В.Н. Хлёстов</span>
-                        <span class="person-tag">Академик, первый ректор</span>
+                        <span class="person-tag">Академик</span>
+                        <span class="person-tag">Ректора</span>
                     </div>
                     <p>Основоположник системного подхода к развитию высшего образования в Тюменской области. Под его руководством пединститут трансформировался в многопрофильный университет.</p>
                     <div style="margin-bottom: 12px; margin-top: 16px;">
@@ -498,7 +588,6 @@
             <div class="section-divider"></div>
         </div>
         <div class="video-grid">
-            <!-- Видео 1: История университетов России -->
             <div class="video-card">
                 <a href="https://rutube.ru/video/6da21512a0bd695e92d0aab73028a085/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
                     <div class="video-wrapper" style="cursor: pointer; position: relative;">
@@ -516,7 +605,6 @@
                 </div>
             </div>
             
-            <!-- Видео 2: Структура современных вузов РФ -->
             <div class="video-card">
                 <a href="https://rutube.ru/video/29bede0eb8aac9b3a5aeb0fcc6c4ce01/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
                     <div class="video-wrapper" style="cursor: pointer; position: relative;">
@@ -534,7 +622,6 @@
                 </div>
             </div>
             
-            <!-- Видео 3: Известные личности ТюмГУ -->
             <div class="video-card">
                 <a href="https://rutube.ru/video/be54cf032675cec84d0dd451d7f2d18b/?r=wd" target="_blank" rel="noopener" style="display: block; text-decoration: none; color: inherit;">
                     <div class="video-wrapper" style="cursor: pointer; position: relative;">
@@ -564,26 +651,17 @@
                 <div class="section-divider"></div>
             </div>
             <ol class="ref-list">
-    <li>Манахов С. В., Рыжакова А. В. — <em>Основные тенденции развития высшего образования в России: количественные и качественные аспекты</em>. <a href="https://cyberleninka.ru/article/n/osnovnye-tendentsii-razvitiya-vysshego-obrazovaniya-v-rossii-kolichestvennye-i-kachestvennye-aspekty" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Павловская А. В. — <em>М. В. Ломоносов и традиции университетского образования</em>. <a href="https://cyberleninka.ru/article/n/m-v-lomonosov-i-traditsii-universitetskogo-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Максимова В. М. — <em>К истории утверждения уставов императорского Московского университета и развитие системы управления университетом</em>. <a href="https://cyberleninka.ru/article/n/k-istorii-utverzhdeniya-ustavov-imperatorskogo-moskovskogo-universiteta-i-razvitie-sistemy-upravleniya-universitetom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Клячко Т. Л. — <em>Новые тенденции в развитии образования</em>. <a href="https://cyberleninka.ru/article/n/novye-tendentsii-v-razvitii-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Бермус А. Г. — <em>Трансформация высшего образования в России с позиций мир-системного анализа: современные тенденции</em>. <a href="https://cyberleninka.ru/article/n/transformatsiya-vysshego-obrazovaniya-v-rossii-s-pozitsiy-mir-sistemnogo-analiza-sovremennye-tendentsii" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Бермус А. Г. — <em>Проблемы и перспективы постболонского реформирования системы высшего образования в России: теоретический обзор</em>. <a href="https://cyberleninka.ru/article/n/problemy-i-perspektivy-postbolonskogo-reformirovaniya-sistemy-vysshego-obrazovaniya-v-rossii-teoreticheskiy-obzor" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Захарьящева В. В. — <em>Ретроспективный анализ развития высшего университетского образования в России и за рубежом</em>. <a href="https://cyberleninka.ru/article/n/retrospektivnyy-analiz-razvitiya-vysshego-universitetskogo-obrazovaniya-v-rossii-i-za-rubezhom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Фандо Р. А. — <em>Развитие негосударственного высшего образования в дореволюционной России (на примере Московского городского народного университета им. А. Л. Шанявского)</em>. <a href="https://cyberleninka.ru/article/n/razvitie-negosudarstvennogo-vysshego-obrazovaniya-v-dorevolyutsionnoy-rossii-na-primere-moskovskogo-gorodskogo-narodnogo" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Клячко Т. Л. — <em>Образование в Российской Федерации: проблемы и тенденции развития в начале XXI века</em>. <a href="https://cyberleninka.ru/article/n/obrazovanie-v-rossiyskoy-federatsii-problemy-i-tendentsii-razvitiya-v-nachale-xxi-veka" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-
-    <li>Новиков С. В. — <em>Современное состояние и тенденции развития российской системы высшего образования</em>. <a href="https://cyberleninka.ru/article/n/sovremennoe-sostoyanie-i-tendentsii-razvitiya-rossiyskoy-sistemy-vysshego-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
-</ol>
+                <li>Манахов С. В., Рыжакова А. В. — <em>Основные тенденции развития высшего образования в России: количественные и качественные аспекты</em>. <a href="https://cyberleninka.ru/article/n/osnovnye-tendentsii-razvitiya-vysshego-obrazovaniya-v-rossii-kolichestvennye-i-kachestvennye-aspekty" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Павловская А. В. — <em>М. В. Ломоносов и традиции университетского образования</em>. <a href="https://cyberleninka.ru/article/n/m-v-lomonosov-i-traditsii-universitetskogo-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Максимова В. М. — <em>К истории утверждения уставов императорского Московского университета и развитие системы управления университетом</em>. <a href="https://cyberleninka.ru/article/n/k-istorii-utverzhdeniya-ustavov-imperatorskogo-moskovskogo-universiteta-i-razvitie-sistemy-upravleniya-universitetom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Клячко Т. Л. — <em>Новые тенденции в развитии образования</em>. <a href="https://cyberleninka.ru/article/n/novye-tendentsii-v-razvitii-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Бермус А. Г. — <em>Трансформация высшего образования в России с позиций мир-системного анализа: современные тенденции</em>. <a href="https://cyberleninka.ru/article/n/transformatsiya-vysshego-obrazovaniya-v-rossii-s-pozitsiy-mir-sistemnogo-analiza-sovremennye-tendentsii" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Бермус А. Г. — <em>Проблемы и перспективы постболонского реформирования системы высшего образования в России: теоретический обзор</em>. <a href="https://cyberleninka.ru/article/n/problemy-i-perspektivy-postbolonskogo-reformirovaniya-sistemy-vysshego-obrazovaniya-v-rossii-teoreticheskiy-obzor" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Захарьящева В. В. — <em>Ретроспективный анализ развития высшего университетского образования в России и за рубежом</em>. <a href="https://cyberleninka.ru/article/n/retrospektivnyy-analiz-razvitiya-vysshego-universitetskogo-obrazovaniya-v-rossii-i-za-rubezhom" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Фандо Р. А. — <em>Развитие негосударственного высшего образования в дореволюционной России (на примере Московского городского народного университета им. А. Л. Шанявского)</em>. <a href="https://cyberleninka.ru/article/n/razvitie-negosudarstvennogo-vysshego-obrazovaniya-v-dorevolyutsionnoy-rossii-na-primere-moskovskogo-gorodskogo-narodnogo" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Клячко Т. Л. — <em>Образование в Российской Федерации: проблемы и тенденции развития в начале XXI века</em>. <a href="https://cyberleninka.ru/article/n/obrazovanie-v-rossiyskoy-federatsii-problemy-i-tendentsii-razvitiya-v-nachale-xxi-veka" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+                <li>Новиков С. В. — <em>Современное состояние и тенденции развития российской системы высшего образования</em>. <a href="https://cyberleninka.ru/article/n/sovremennoe-sostoyanie-i-tendentsii-razvitiya-rossiyskoy-sistemy-vysshego-obrazovaniya" class="ref-link" target="_blank">Открыть в CyberLeninka →</a></li>
+            </ol>
         </div>
     </section>
 
@@ -597,6 +675,19 @@
                     </a>
                     <p>Информационно-аналитический ресурс, посвящённый эволюции высшего образования в Российской Федерации. Материалы основаны на рецензируемых научных публикациях.</p>
                 </div>
+
+                <div class="footer-links">
+                    <h4>Выполнили</h4>
+                    <ul>
+                        <li><span>Болотников Сергей</span></li>
+                        <li><span>Давлетшина Ариадна</span></li>
+                        <li><span>Лебедев Владислав</span></li>
+                        <li><span>Мальцева Анна</span></li>
+                        <li><span>Мумлев Вадим</span></li>
+                        <li><span>Чуракова Дарья</span></li>
+                    </ul>
+                </div>
+
                 <div class="footer-links">
                     <h4>Разделы</h4>
                     <ul>
@@ -607,6 +698,7 @@
                         <li><a href="#videos">Видео</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-links">
                     <h4>Источники</h4>
                     <ul>
@@ -629,8 +721,14 @@
 
         const menuToggle = document.getElementById('menuToggle');
         const nav = document.getElementById('nav');
-        menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
-        nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }));
 
         document.querySelectorAll('.timeline-item').forEach(item => {
             const observer = new IntersectionObserver(entries => {
