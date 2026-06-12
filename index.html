@@ -126,13 +126,116 @@
         .structure-list li::before { content: '•'; color: var(--brown); font-weight: bold; font-size: 18px; }
 
         .tyumgu-section { background: var(--white); }
-        .tyumgu-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; margin-top: 40px; }
         .tyumgu-text p { font-size: 15px; color: var(--text-secondary); margin-bottom: 16px; text-align: justify; }
         .tyumgu-text h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
-        .tyumgu-card { background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 32px; }
+        .tyumgu-card { background: var(--white); border: 1px solid var(--cream-dark); border-radius: 16px; padding: 32px; }
         .tyumgu-card h4 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 14px; color: var(--text-primary); }
         .tyumgu-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; text-align: justify; margin-bottom: 12px; }
         .person-tag { display: inline-block; margin: 4px 4px 0 0; padding: 4px 10px; background: rgba(196, 162, 101, 0.1); border: 1px solid rgba(196, 162, 101, 0.2); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--brown); }
+        
+        /* === НОВЫЕ СТИЛИ ДЛЯ РАЗДЕЛЕНИЯ БЛОКОВ ТЮМГУ === */
+        .tyumgu-block {
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 64px; /* Увеличенное расстояние между блоками */
+        }
+        .tyumgu-block:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Блок 1: История (светлый) */
+        .tyumgu-block-history {
+            background-color: var(--cream-light);
+            border: 1px solid var(--cream-dark);
+        }
+        
+        /* Блок 2: Личности (чуть темнее, для контраста) */
+        .tyumgu-block-people {
+            background-color: var(--cream);
+            border: 1px solid var(--beige);
+        }
+
+        /* Внутренняя сетка каждого блока */
+        .tyumgu-block-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .tyumgu-block .tyumgu-text {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tyumgu-block .tyumgu-card {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Карточка на цветном фоне выглядит как вложенный элемент */
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(74, 63, 53, 0.04);
+        }
+
+        .tyumgu-block .tyumgu-images-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .tyumgu-image-horiz {
+            flex: 1 1 0%;
+            min-height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--cream-dark);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .tyumgu-image-horiz img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .tyumgu-image-horiz:hover img { transform: scale(1.04); }
+
+        .tyumgu-image-vert {
+            flex: 1 1 0%;
+            min-height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--cream-dark);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .tyumgu-image-vert img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .tyumgu-image-vert:hover img { transform: scale(1.04); }
+
+        .tyumgu-image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(74, 63, 53, 0.85));
+            color: white;
+            padding: 24px 16px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
 
         .modern-section { background: var(--cream-light); }
         .modern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
@@ -155,7 +258,7 @@
         .ref-link { color: var(--brown-light); text-decoration: none; border-bottom: 1px dashed var(--brown-light); transition: color 0.2s; font-weight: 600; }
         .ref-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
-        /* FOOTER (РАВНОМЕРНОЕ РАСПРЕДЕЛЕНИЕ) */
+        /* FOOTER */
         footer { background: var(--text-primary); color: rgba(255, 253, 249, 0.7); padding: 50px 40px 35px; }
         .footer-inner { max-width: 1150px; margin: 0 auto; }
         .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; padding-bottom: 35px; border-bottom: 1px solid rgba(255, 253, 249, 0.1); }
@@ -194,7 +297,7 @@
             .section { padding: 60px 20px; }
             .section-title { font-size: clamp(24px, 5vw, 32px); }
             .section-desc { font-size: 15px; }
-            .intro-grid, .structure-grid, .tyumgu-grid { gap: 32px; }
+            .intro-grid, .structure-grid { gap: 32px; }
             .video-grid, .modern-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             
             .timeline::before { left: 16px; }
@@ -206,6 +309,24 @@
             .timeline-year { font-size: 20px; }
             .footer-links a, .footer-links li span { font-size: 13px; }
             .quote-text { font-size: clamp(18px, 4vw, 24px); }
+            
+            /* Адаптация блоков ТюмГУ */
+            .tyumgu-block {
+                padding: 24px;
+                margin-bottom: 32px;
+                border-radius: 20px;
+            }
+            .tyumgu-block-inner {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .tyumgu-images-stack {
+                min-height: 300px;
+                order: -1; /* На мобильных картинки идут перед текстом для красоты */
+            }
+            .tyumgu-image-vert {
+                min-height: 360px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -231,7 +352,7 @@
             .section-desc { font-size: 14px; }
             .section-divider { width: 48px; }
             
-            .intro-grid, .structure-grid, .tyumgu-grid, .video-grid, .modern-grid { grid-template-columns: 1fr; gap: 24px; }
+            .intro-grid, .structure-grid, .video-grid, .modern-grid { grid-template-columns: 1fr; gap: 24px; }
             .intro-text h3, .structure-block h3, .tyumgu-text h3 { font-size: 20px; }
             .intro-text p, .structure-block p, .tyumgu-card p { font-size: 14px; }
             
@@ -244,7 +365,6 @@
             .timeline-title { font-size: 15px; }
             .timeline-desc { font-size: 13px; line-height: 1.6; }
             
-            .tyumgu-grid { gap: 28px; }
             .tyumgu-card { padding: 24px; }
             .modern-card { padding: 24px; }
             .modern-card-icon { width: 40px; height: 40px; font-size: 18px; }
@@ -253,7 +373,6 @@
             .quote-author { font-size: 13px; }
             .ref-list li { font-size: 14px; padding: 12px 0; }
             
-            /* ФУТЕР НА МОБИЛЬНЫХ: Компактная сетка 2x2 */
             footer { padding: 40px 16px 24px; }
             .footer-top { flex-direction: column; gap: 24px; padding-bottom: 24px; align-items: stretch; }
             .footer-brand { width: 100%; max-width: 100%; margin-bottom: 4px; text-align: center; }
@@ -277,6 +396,9 @@
             a, button, .menu-toggle { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
             nav a { min-height: auto; padding: 12px 16px; }
             .timeline-bg-image { display: none !important; }
+            
+            .tyumgu-images-stack { min-height: 260px; }
+            .tyumgu-image-vert { min-height: 320px; }
         }
 
         @media (max-width: 340px) {
@@ -287,6 +409,7 @@
             nav a:hover { background: none; }
             .video-card:hover, .modern-card:hover, .structure-block:hover { transform: none; box-shadow: 0 12px 40px rgba(74, 63, 53, 0.06); }
             .timeline-content:hover { box-shadow: 0 12px 40px rgba(74, 63, 53, 0.08); }
+            .tyumgu-image-horiz:hover img, .tyumgu-image-vert:hover img { transform: none; }
         }
     </style>
 </head>
@@ -504,33 +627,59 @@
                 <p class="section-desc">От педагогического института к ведущему научно-образовательному центру Западной Сибири</p>
                 <div class="section-divider"></div>
             </div>
-            <div class="tyumgu-grid">
-                <div class="tyumgu-text">
-                    <h3>История и миссия</h3>
-                    <p>Тюменский государственный университет (ТюмГУ) ведёт свою историю от Тюменского педагогического института, основанного в 1930 году. Статус университета был получен в 1993 году, что позволило расширить спектр направлений подготовки и усилить научную составляющую деятельности.</p>
-                    <p>Университет традиционно играет ключевую роль в кадровом обеспечении нефтегазовой отрасли Западной Сибири, а также в развитии педагогики, биологии, гуманитарных наук и цифровых технологий. В 2010-е годы ТюмГУ вошёл в число опорных вузов, а впоследствии стал участником программы «Приоритет 2030».</p>
-                    <p>Научная школа ТюмГУ известна исследованиями в области криологии, экологии Севера, археологии Западной Сибири и цифровой экономики. Университет активно развивает кластерный подход, объединяя академические подразделения с промышленными партнёрами региона.</p>
-                </div>
-                <div class="tyumgu-card">
-                    <h4>Известные личности и выпускники</h4>
-                    <p>За более чем 90 лет существования вуз подготовил десятки тысяч специалистов, среди которых выдающиеся учёные, государственные деятели, деятели культуры и спорта.</p>
-                    <div style="margin-bottom: 12px;">
-                        <span class="person-tag">Академик</span>
-                        <span class="person-tag">Ректора</span>
+            
+            <!-- БЛОК 1: История и миссия (светлый фон) -->
+            <div class="tyumgu-block tyumgu-block-history">
+                <div class="tyumgu-block-inner">
+                    <div class="tyumgu-text">
+                        <h3>История и миссия</h3>
+                        <p>Тюменский государственный университет (ТюмГУ) ведёт свою историю от Тюменского педагогического института, основанного в 1930 году. Статус университета был получен в 1993 году, что позволило расширить спектр направлений подготовки и усилить научную составляющую деятельности.</p>
+                        <p>Университет традиционно играет ключевую роль в кадровом обеспечении нефтегазовой отрасли Западной Сибири, а также в развитии педагогики, биологии, гуманитарных наук и цифровых технологий. В 2010-е годы ТюмГУ вошёл в число опорных вузов, а впоследствии стал участником программы «Приоритет 2030».</p>
+                        <p>Научная школа ТюмГУ известна исследованиями в области криологии, экологии Севера, археологии Западной Сибири и цифровой экономики. Университет активно развивает кластерный подход, объединяя академические подразделения с промышленными партнёрами региона.</p>
                     </div>
-                    <p>Основоположник системного подхода к развитию высшего образования в Тюменской области. Под его руководством пединститут трансформировался в многопрофильный университет.</p>
-                    <div style="margin-bottom: 12px; margin-top: 16px;">
-                        <span class="person-tag">Учёные-геологи</span>
-                        <span class="person-tag">Нефтегазовая отрасль</span>
+                    <div class="tyumgu-images-stack">
+                        <div class="tyumgu-image-horiz">
+                            <img src="images/10_image.jpg" alt="Главный корпус ТюмГУ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\' style=\'height: 100%;\'>images/10_image.jpg</div>'">
+                            <div class="tyumgu-image-caption">Главный корпус ТюмГУ</div>
+                        </div>
+                        <div class="tyumgu-image-horiz">
+                            <img src="images/11_image.jpeg" alt="Кампус университета" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\' style=\'height: 100%;\'>images/11_image.jpg</div>'">
+                            <div class="tyumgu-image-caption">Ректор ТюмГУ</div>
+                        </div>
                     </div>
-                    <p>Выпускники факультета геологии и географии внесли ключевой вклад в открытие и освоение месторождений Западной Сибири, сформировав научную базу отечественной нефтегазовой промышленности.</p>
-                    <div style="margin-bottom: 12px; margin-top: 16px;">
-                        <span class="person-tag">Педагоги и писатели</span>
-                        <span class="person-tag">Культура региона</span>
-                    </div>
-                    <p>Среди выпускников — заслуженные учителя РФ, авторы учебников, поэты и прозаики, чьи произведения вошли в антологии сибирской литературы. Университет продолжает традиции подготовки кадров для образовательной и культурной сфер.</p>
                 </div>
             </div>
+            
+            <!-- БЛОК 2: Известные личности (фон потемнее, карточка внутри белая) -->
+            <div class="tyumgu-block tyumgu-block-people">
+                <div class="tyumgu-block-inner">
+                    <div class="tyumgu-card">
+                        <h4>Известные личности и выпускники</h4>
+                        <p>За более чем 90 лет существования вуз подготовил десятки тысяч специалистов, среди которых выдающиеся учёные, государственные деятели, деятели культуры и спорта.</p>
+                        <div style="margin-bottom: 12px;">
+                            <span class="person-tag">Академики</span>
+                            <span class="person-tag">Ректора</span>
+                        </div>
+                        <p>Основоположник системного подхода к развитию высшего образования в Тюменской области. Под его руководством пединститут трансформировался в многопрофильный университет.</p>
+                        <div style="margin-bottom: 12px; margin-top: 16px;">
+                            <span class="person-tag">Учёные-геологи</span>
+                            <span class="person-tag">Нефтегазовая отрасль</span>
+                        </div>
+                        <p>Выпускники факультета геологии и географии внесли ключевой вклад в открытие и освоение месторождений Западной Сибири, сформировав научную базу отечественной нефтегазовой промышленности.</p>
+                        <div style="margin-bottom: 12px; margin-top: 16px;">
+                            <span class="person-tag">Педагоги и писатели</span>
+                            <span class="person-tag">Культура региона</span>
+                        </div>
+                        <p>Среди выпускников — заслуженные учителя РФ, авторы учебников, поэты и прозаики, чьи произведения вошли в антологии сибирской литературы. Университет продолжает традиции подготовки кадров для образовательной и культурной сфер.</p>
+                    </div>
+                    <div class="tyumgu-images-stack">
+                        <div class="tyumgu-image-vert">
+                            <img src="images/12_image.jpeg" alt="Выдающиеся учёные ТюмГУ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'timeline-image-placeholder\' style=\'height: 100%;\'>images/12_image.jpg</div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
@@ -655,7 +804,6 @@
     <footer>
         <div class="footer-inner">
             <div class="footer-top">
-                <!-- 1. Бренд -->
                 <div class="footer-brand">
                     <a href="#" class="logo">
                         <div class="logo-icon">У</div>
@@ -664,7 +812,6 @@
                     <p>Информационно-аналитический ресурс, посвящённый эволюции высшего образования в Российской Федерации. Материалы основаны на рецензируемых научных публикациях.</p>
                 </div>
                 
-                <!-- 2. Выполнили -->
                 <div class="footer-links">
                     <h4>Выполнили</h4>
                     <ul>
@@ -677,7 +824,6 @@
                     </ul>
                 </div>
 
-                <!-- 3. Разделы -->
                 <div class="footer-links">
                     <h4>Разделы</h4>
                     <ul>
@@ -689,7 +835,6 @@
                     </ul>
                 </div>
 
-                <!-- 4. Источники -->
                 <div class="footer-links">
                     <h4>Источники</h4>
                     <ul>
@@ -743,7 +888,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.structure-block, .modern-card, .tyumgu-text, .tyumgu-card, .video-card').forEach(el => {
+        document.querySelectorAll('.structure-block, .modern-card, .tyumgu-text, .tyumgu-card, .video-card, .tyumgu-block, .tyumgu-image-horiz, .tyumgu-image-vert').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
